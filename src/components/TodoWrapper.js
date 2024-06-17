@@ -12,6 +12,10 @@ const TodoWrapper = () => {
       console.log(items)
     }
 
+    const handleClick = id => { // find the matching todo item and update its completed value while keeping the rest of the item the same 
+      setItems(items.map(item => item.id === id ? {...item, completed: !item.completed} : item))
+    }
+
   return (
     <div className='TodoWrapper'>
         <h1>Reminders</h1>
@@ -20,7 +24,7 @@ const TodoWrapper = () => {
 
         {/* Todo item components to display tasks */}
         {items.map((item, index) => ( 
-          <Todo task={item} key={index} />
+          <Todo task={item} key={index} handleClick={handleClick} />
         ))}
     </div>
   )
