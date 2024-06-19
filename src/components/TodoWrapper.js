@@ -16,6 +16,14 @@ const TodoWrapper = () => {
       setItems(items.map(item => item.id === id ? {...item, completed: !item.completed} : item))
     }
 
+    const deleteItem = id => {
+      setItems(items.filter(item => item.id !== id)) // keep the items that do not have the id we want to delete
+    }
+
+    const editItem = id => {
+      setItems(items.map(item => item.id === id ? {...item, isEditing: !item.isEditing} : item))
+    }
+
   return (
     <div className='TodoWrapper'>
         <h1>Reminders</h1>
@@ -24,7 +32,7 @@ const TodoWrapper = () => {
 
         {/* Todo item components to display tasks */}
         {items.map((item, index) => ( 
-          <Todo task={item} key={index} handleClick={handleClick} />
+          <Todo task={item} key={index} handleClick={handleClick} deleteItem={deleteItem} editItem={editItem} />
         ))}
     </div>
   )
